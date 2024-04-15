@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { PieChart } from '@mui/x-charts/PieChart';
 import { SkeletonBlock } from './skeleton-block';
 import { Grid } from '@mui/material';
+import { LineChart } from '@mui/x-charts';
 
 export default function Expenditures() {
 
@@ -24,7 +25,8 @@ export default function Expenditures() {
       })
   }, [])
 
-  const chartSizes = { width: 400, height: 200 }
+  const pieChartSizes = { width: 400, height: 200 }
+  const lineChartSizes = { width: 500, height: 300 }
   const chartColors = ['red', 'green']
 
   return (
@@ -42,15 +44,29 @@ export default function Expenditures() {
                 ]
               },
             ]}
-            width={chartSizes.width}
-            height={chartSizes.height}
+            width={pieChartSizes.width}
+            height={pieChartSizes.height}
           />
           <Grid>
             <p>Ganancias: {exData.totalIncome}</p>
             <p>Gastos: {exData.totalExpenses}</p>
-            <p style={{color: exData.revenue > 0 ? chartColors[1] : chartColors[0],fontWeight:"bold"}}>
-              {exData.revenue > 0 ? 'Ganancia':'Perdida'}: {exData.revenue}</p>
+            <p style={{ color: exData.revenue > 0 ? chartColors[1] : chartColors[0], fontWeight: "bold" }}>
+              {exData.revenue > 0 ? 'Ganancia' : 'Perdida'}: {`${exData.revenue} (%${exData.marginPercentage})`}</p>
           </Grid>
+          <LineChart
+          xAxis={[{ 
+            label: "Dias a partir de hoy",
+            data: exData.timechart.daysFromToday 
+          }]}
+          series={[
+            {
+              label: "Flujo (MXN)",
+              data: exData.timechart.revenueAtDate,
+            },
+          ]}
+          width={lineChartSizes.width}
+          height={lineChartSizes.height}
+        />
         </Grid>
       </Box>
         : <SkeletonBlock />

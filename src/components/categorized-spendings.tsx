@@ -8,6 +8,7 @@ import Paper from '@mui/material/Paper';
 import { Box } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { SkeletonBlock } from './skeleton-block';
+import { PieChart } from '@mui/x-charts';
 
 
 export const CategorizedSpendings = () => {
@@ -28,6 +29,8 @@ export const CategorizedSpendings = () => {
         console.log("Faulty data from fetch")
       })
   }, [])
+  const pieChartSizes = { width: 600, height: 200 }
+  const pieChartColors = ['red', 'green']
   return (
     <>
       {!loading ?
@@ -38,7 +41,7 @@ export const CategorizedSpendings = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>Categoria</TableCell>
-                  <TableCell align="right">Cantidad</TableCell>
+                  <TableCell align="center">Cantidad</TableCell>
                   <TableCell align="right">No. de Transacciones</TableCell>
                 </TableRow>
               </TableHead>
@@ -49,13 +52,27 @@ export const CategorizedSpendings = () => {
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell>{row.category}</TableCell>
-                    <TableCell align="right">{row.amount}</TableCell>
+                    <TableCell align="center">{row.amount}</TableCell>
                     <TableCell align="right">{row.transactions}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
+          <>
+          <PieChart
+            series={[
+              {
+                data: [
+                  ...catData.map((transaction, idx) => 
+                    {return {id: idx, value: transaction.amount, label: transaction.category}})
+                ]
+              },
+            ]}
+            width={pieChartSizes.width}
+            height={pieChartSizes.height}
+          />
+          </>
         </Box>
         : <SkeletonBlock />}
     </>

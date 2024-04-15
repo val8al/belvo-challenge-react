@@ -1,18 +1,24 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
-import Button from '@mui/material/Button';
 import { CategorizedSpendings, TransactionList } from './components';
 import Expenditures from './components/expenditures';
+import { LoginView } from './components/login';
 
 function App() {
   
+  const [link, setLink] = useState<string>("")
   return (
     <>
-      <TransactionList/>
-      <CategorizedSpendings/>
-      <Expenditures/>
+    {link ? 
+      <>
+        <TransactionList/>
+        <CategorizedSpendings/>
+        <Expenditures/>
+      </>
+     : 
+    <LoginView setLink={(link) => setLink(link)}/>
+    }
     </>
   );
 }
