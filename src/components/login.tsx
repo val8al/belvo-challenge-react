@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from "@mui/material"
+import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Skeleton, TextField } from "@mui/material"
 import React, { ChangeEvent, FormEvent } from "react";
 import { mockAuthWithTimeout } from "../util/helper";
 
@@ -19,22 +19,27 @@ export const LoginView: React.FC<LoginComponentProps> = ({setLink}) => {
         event.preventDefault();
         
         try {
+            setLoading(true)
             const response = await mockAuthWithTimeout({  //Given time constrains, mocking auth for now
                 link: '3bcd9822-8dd5-4710-a422-d3ac730df48e',ok: true },1000)
 
             if (response.ok) {
                 const data = await response.json();
+                setLoading(false)
                 setLink(data.link)
             } else {
+                setLoading(false)
                 console.error('Login failed:', response.status);
             }
         } catch (error) {
+            setLoading(false)
             console.error('Error during login:', error);
         }
 
     }
     return (
-        <Box sx={{ flexGrow: 1, padding: 2 }}>
+        <>
+        {!loading ? ( <Box sx={{ flexGrow: 1, padding: 2 }}>
             <Grid container spacing={2} p={2} alignContent="center" direction="column">
                 <form onSubmit={handleSubmit}>
             <FormControl >
@@ -60,6 +65,9 @@ export const LoginView: React.FC<LoginComponentProps> = ({setLink}) => {
             </FormControl>
             </form>
             </Grid>
-        </Box>
+        </Box>)
+        : <><h1>Authenticating...</h1> 
+        <Skeleton variant="circular" width={100} height={100} /></>
+        }</>
     )
 }
