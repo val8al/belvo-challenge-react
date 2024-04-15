@@ -9,14 +9,16 @@ import { Box } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { SkeletonBlock } from './skeleton-block';
 import { PieChart } from '@mui/x-charts';
+import { BaseComponentProps } from '../util/interfaces';
+import { apiUrlSandbox } from '../util/global';
 
 
-export const CategorizedSpendings = () => {
+export const CategorizedSpendings: React.FC<BaseComponentProps> = ({link}) => {
   const [catData, setCatData] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch('http://localhost:3000/spending-categories?link=3bcd9822-8dd5-4710-a422-d3ac730df48e')
+    fetch(`${apiUrlSandbox}/spending-categories?link=${link}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Bad response')
@@ -29,8 +31,8 @@ export const CategorizedSpendings = () => {
         console.log("Faulty data from fetch")
       })
   }, [])
+  
   const pieChartSizes = { width: 600, height: 200 }
-  const pieChartColors = ['red', 'green']
   return (
     <>
       {!loading ?

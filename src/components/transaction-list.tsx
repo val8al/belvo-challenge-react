@@ -5,17 +5,18 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box, Skeleton } from '@mui/material';
+import { Box } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { SkeletonBlock } from './skeleton-block';
+import { BaseComponentProps } from '../util/interfaces';
+import { apiUrlSandbox } from '../util/global';
 
 
-export const TransactionList = () => {
+export const TransactionList: React.FC<BaseComponentProps> = ({link}) => {
   const [transData, setTransData] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
-
   useEffect(() => {
-    fetch('http://localhost:3000/transactions-ctrl?link=3bcd9822-8dd5-4710-a422-d3ac730df48e')
+    fetch(`${apiUrlSandbox}/transactions-ctrl?link=${link}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Bad response')

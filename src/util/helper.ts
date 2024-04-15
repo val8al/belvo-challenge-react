@@ -1,8 +1,5 @@
-interface MockResponse {
-    ok: boolean;
-    status: number;
-    json: () => Promise<any>;
-}
+import { MockResponse } from "./interfaces";
+
 
 export function mockAuthWithTimeout<T>(data: T, timeout: number): Promise<MockResponse> {
     return new Promise((resolve, reject) => {

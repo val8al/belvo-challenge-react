@@ -1,10 +1,8 @@
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, Skeleton, TextField } from "@mui/material"
 import React, { ChangeEvent, FormEvent } from "react";
 import { mockAuthWithTimeout } from "../util/helper";
+import { LoginComponentProps } from "../util/interfaces";
 
-interface LoginComponentProps {
-    setLink: (link: string) => void;
-}
 
 export const LoginView: React.FC<LoginComponentProps> = ({setLink}) => {
     const [user, setUser] = React.useState("");

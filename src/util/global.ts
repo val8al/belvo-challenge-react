@@ -1,0 +1,1 @@
+export const apiUrlSandbox: string = "http://localhost:3000"

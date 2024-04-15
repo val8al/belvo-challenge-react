@@ -4,14 +4,16 @@ import { PieChart } from '@mui/x-charts/PieChart';
 import { SkeletonBlock } from './skeleton-block';
 import { Grid } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
+import { BaseComponentProps } from '../util/interfaces';
+import { apiUrlSandbox } from '../util/global';
 
-export default function Expenditures() {
+export const Expenditures: React.FC<BaseComponentProps> = ({link}) => {
 
   const [exData, setExData] = React.useState<any>(null)
   const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
-    fetch('http://localhost:3000/financial-health?link=3bcd9822-8dd5-4710-a422-d3ac730df48e')
+    fetch(`${apiUrlSandbox}/financial-health?link=${link}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Bad response')

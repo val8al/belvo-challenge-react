@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 
-import { CategorizedSpendings, TransactionList } from './components';
-import Expenditures from './components/expenditures';
+import { CategorizedSpendings, Expenditures, TransactionList } from './components';
 import { LoginView } from './components/login';
 
 function App() {
@@ -12,9 +11,9 @@ function App() {
     <>
     {link ? 
       <>
-        <TransactionList/>
-        <CategorizedSpendings/>
-        <Expenditures/>
+        <TransactionList link={link}/>
+        <CategorizedSpendings link={link}/>
+        <Expenditures link={link}/>
       </>
      : 
     <LoginView setLink={(link) => setLink(link)}/>
