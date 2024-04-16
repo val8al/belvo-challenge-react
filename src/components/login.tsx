@@ -55,7 +55,8 @@ export const LoginView: React.FC<LoginComponentProps> = ({setLink}) => {
                         </Select>
                 </Grid>
                 <Grid item xs={8}>
-                    <TextField label="Contrasenia" variant="outlined" type="password" onChange={(e) => setPwd(e.target.value)} />
+                    <TextField label="Contraseña" variant="outlined" type="password" 
+                    onChange={(e) => setPwd(e.target.value)} />
                 </Grid>
                 <Grid item xs={8}>
                     <Button fullWidth type="submit" variant="outlined">Ingresar</Button>

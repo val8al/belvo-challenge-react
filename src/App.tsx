@@ -3,6 +3,7 @@ import './App.css';
 
 import { CategorizedSpendings, Expenditures, TransactionList } from './components';
 import { LoginView } from './components/login';
+import { AccountsTable } from './components/accounts-table';
 
 function App() {
   
@@ -13,6 +14,7 @@ function App() {
       <>
         <TransactionList link={link}/>
         <CategorizedSpendings link={link}/>
+        <AccountsTable link={link}/>
         <Expenditures link={link}/>
       </>
      : 
