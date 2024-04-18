@@ -31,10 +31,9 @@ export const TransactionList: React.FC<BaseComponentProps> = ({link}) => {
   }, [])
 
   return (
-    <Box component="section" sx={{ p: 2, border: 'px grey' }}>
-      <>
-        { !loading ? (
-          
+    <>{
+      !loading ? 
+    <Box component="section" sx={{ p: 2, border: 'px grey' }} padding={2}>
           <TableContainer component={Paper}>
             <h3>Lista de transacciones</h3>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -65,10 +64,8 @@ export const TransactionList: React.FC<BaseComponentProps> = ({link}) => {
                 }
               </TableBody>
             </Table>
-          </TableContainer>)
-          : <SkeletonBlock/>
-        }
-      </>
+          </TableContainer>
     </Box>
+    : <SkeletonBlock/>}</>
   );
 }

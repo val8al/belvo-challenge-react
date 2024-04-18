@@ -33,7 +33,7 @@ export const Expenditures: React.FC<BaseComponentProps> = ({link}) => {
 
   return (
     <>
-      {!loading ? <Box component="section" sx={{ p: 4, border: '1px dashed grey' }}>
+      {!loading ? <Box sx={{ p: 4 }}>
         <h3>Analisis de Gastos</h3>
         <Grid container>
           <PieChart

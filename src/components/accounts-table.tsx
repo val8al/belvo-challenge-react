@@ -35,7 +35,7 @@ export const AccountsTable: React.FC<BaseComponentProps> = ({link}) => {
   return (
     <>
       {!loading ?
-      <Box component="section" sx={{ p: 2, border: 'px grey' }}>
+      <Box component="section" sx={{ p: 2}}>
         <TableContainer component={Paper}>
           <h3>Tus cuentas</h3>
           <Table sx={{ minWidth: 650 }} size="small">

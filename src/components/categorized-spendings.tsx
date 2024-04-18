@@ -5,7 +5,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { SkeletonBlock } from './skeleton-block';
 import { PieChart } from '@mui/x-charts';
@@ -13,7 +13,7 @@ import { BaseComponentProps } from '../util/interfaces';
 import { apiUrlSandbox } from '../util/global';
 
 
-export const CategorizedSpendings: React.FC<BaseComponentProps> = ({link}) => {
+export const CategorizedSpendings: React.FC<BaseComponentProps> = ({ link }) => {
   const [catData, setCatData] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -31,12 +31,13 @@ export const CategorizedSpendings: React.FC<BaseComponentProps> = ({link}) => {
         console.log("Faulty data from fetch")
       })
   }, [])
-  
+
   const pieChartSizes = { width: 600, height: 200 }
   return (
     <>
       {!loading ?
-        <Box component="section" sx={{ p: 2, border: 'px grey' }}>
+        <Box component="section" sx={{ p: 4, border: 'px grey' }}>
+          <Grid container spacing={{md: 2}}>
           <h3>Transacciones por Categoria</h3>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -62,19 +63,19 @@ export const CategorizedSpendings: React.FC<BaseComponentProps> = ({link}) => {
             </Table>
           </TableContainer>
           <>
-          <PieChart
-            series={[
-              {
-                data: [
-                  ...catData.map((transaction, idx) => 
-                    {return {id: idx, value: transaction.amount, label: transaction.category}})
-                ]
-              },
-            ]}
-            width={pieChartSizes.width}
-            height={pieChartSizes.height}
-          />
+            <PieChart
+              series={[
+                {
+                  data: [
+                    ...catData.map((transaction, idx) => { return { id: idx, value: transaction.amount, label: transaction.category } })
+                  ]
+                },
+              ]}
+              width={pieChartSizes.width}
+              height={pieChartSizes.height}
+            />
           </>
+        </Grid>
         </Box>
         : <SkeletonBlock />}
     </>

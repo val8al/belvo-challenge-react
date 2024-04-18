@@ -2,6 +2,7 @@ import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Select, SelectCha
 import React, { ChangeEvent, FormEvent } from "react";
 import { mockAuthWithTimeout } from "../util/helper";
 import { LoginComponentProps } from "../util/interfaces";
+import { AuthLoadingView } from "./auth-load";
 
 
 export const LoginView: React.FC<LoginComponentProps> = ({setLink}) => {
@@ -19,7 +20,7 @@ export const LoginView: React.FC<LoginComponentProps> = ({setLink}) => {
         try {
             setLoading(true)
             const response = await mockAuthWithTimeout({  //Given time constrains, mocking auth for now
-                link: '3bcd9822-8dd5-4710-a422-d3ac730df48e',ok: true },1000)
+                link: '3bcd9822-8dd5-4710-a422-d3ac730df48e',ok: true },3000)
 
             if (response.ok) {
                 const data = await response.json();
@@ -65,8 +66,7 @@ export const LoginView: React.FC<LoginComponentProps> = ({setLink}) => {
             </form>
             </Grid>
         </Box>)
-        : <><h1>Authenticating...</h1> 
-        <Skeleton variant="circular" width={100} height={100} /></>
+        : <AuthLoadingView/>
         }</>
     )
 }
