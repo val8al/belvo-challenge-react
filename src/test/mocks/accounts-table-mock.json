@@ -1,0 +1,32 @@
+[
+    {
+        "bank_name": "gringotts_mx_retail",
+        "account_name": "Tarjeta Plata",
+        "balance": 81036.08
+    },
+    {
+        "bank_name": "gringotts_mx_retail",
+        "account_name": "Cuenta digital",
+        "balance": 34699
+    },
+    {
+        "bank_name": "gringotts_mx_retail",
+        "account_name": "Cuenta digital",
+        "balance": 16826.76
+    },
+    {
+        "bank_name": "gringotts_mx_retail",
+        "account_name": "Tarjeta Platino",
+        "balance": 25324.13
+    },
+    {
+        "bank_name": "gringotts_mx_retail",
+        "account_name": "Cartão crédito visa platinum",
+        "balance": 29235.81
+    },
+    {
+        "bank_name": "gringotts_mx_retail",
+        "account_name": "Cuenta perfiles",
+        "balance": 78985.3
+    }
+]

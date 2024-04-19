@@ -6,6 +6,7 @@ import { Grid } from '@mui/material';
 import { LineChart } from '@mui/x-charts';
 import { BaseComponentProps } from '../util/interfaces';
 import { apiUrlSandbox } from '../util/global';
+import { fetchAccountData } from '../util/helper';
 
 export const Expenditures: React.FC<BaseComponentProps> = ({link}) => {
 
@@ -13,18 +14,7 @@ export const Expenditures: React.FC<BaseComponentProps> = ({link}) => {
   const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
-    fetch(`${apiUrlSandbox}/financial-health?link=${link}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Bad response')
-        }
-        return response.json()
-      }).then(data => {
-        setExData(data);
-        setLoading(false)
-      }).catch(error => {
-        console.log("Faulty data from fetch")
-      })
+    fetchAccountData(link,'financial-health',setExData, setLoading);
   }, [])
 
   const pieChartSizes = { width: 400, height: 200 }

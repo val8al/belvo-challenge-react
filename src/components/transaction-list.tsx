@@ -10,24 +10,15 @@ import { useEffect, useState } from 'react';
 import { SkeletonBlock } from './skeleton-block';
 import { BaseComponentProps } from '../util/interfaces';
 import { apiUrlSandbox } from '../util/global';
+import { fetchAccountData } from '../util/helper';
 
 
 export const TransactionList: React.FC<BaseComponentProps> = ({link}) => {
   const [transData, setTransData] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  
   useEffect(() => {
-    fetch(`${apiUrlSandbox}/transactions-ctrl?link=${link}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Bad response')
-        }
-        return response.json()
-      }).then(data => {
-        setTransData(data);
-        setLoading(false)
-      }).catch(error => {
-        console.log("Faulty data from fetch")
-      })
+    fetchAccountData(link,'transactions-ctrl',setTransData, setLoading);
   }, [])
 
   return (

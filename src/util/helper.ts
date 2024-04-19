@@ -1,4 +1,5 @@
 import { MockResponse } from "./interfaces";
+import { apiUrlSandbox } from '../util/global';
 
 
 export function mockAuthWithTimeout<T>(data: T, timeout: number): Promise<MockResponse> {
@@ -13,3 +14,18 @@ export function mockAuthWithTimeout<T>(data: T, timeout: number): Promise<MockRe
         }, timeout);
     });
 }
+
+export const fetchAccountData = (link: string, reqPath:string , setData: (data: any) => void, setLoading: (b: boolean) => void) =>{
+    fetch(`${apiUrlSandbox}/${reqPath}?link=${link}`)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Bad response')
+      }
+      return response.json()
+    }).then(data => {
+      setData(data);
+      setLoading(false)
+    }).catch(error => {
+      console.log("Faulty data from fetch")
+    })
+  }

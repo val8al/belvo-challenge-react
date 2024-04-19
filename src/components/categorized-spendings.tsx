@@ -11,6 +11,7 @@ import { SkeletonBlock } from './skeleton-block';
 import { PieChart } from '@mui/x-charts';
 import { BaseComponentProps } from '../util/interfaces';
 import { apiUrlSandbox } from '../util/global';
+import { fetchAccountData } from '../util/helper';
 
 
 export const CategorizedSpendings: React.FC<BaseComponentProps> = ({ link }) => {
@@ -18,18 +19,7 @@ export const CategorizedSpendings: React.FC<BaseComponentProps> = ({ link }) => 
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`${apiUrlSandbox}/spending-categories?link=${link}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Bad response')
-        }
-        return response.json()
-      }).then(data => {
-        setCatData(data);
-        setLoading(false)
-      }).catch(error => {
-        console.log("Faulty data from fetch")
-      })
+    fetchAccountData(link,'spending-categories',setCatData, setLoading);
   }, [])
 
   const pieChartSizes = { width: 600, height: 200 }

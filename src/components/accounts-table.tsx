@@ -10,6 +10,7 @@ import { apiUrlSandbox } from '../util/global';
 import { SkeletonBlock } from './skeleton-block';
 import { BaseComponentProps } from '../util/interfaces';
 import { Box } from '@mui/material';
+import { fetchAccountData } from '../util/helper';
 
 
 export const AccountsTable: React.FC<BaseComponentProps> = ({link}) => {
@@ -18,19 +19,9 @@ export const AccountsTable: React.FC<BaseComponentProps> = ({link}) => {
   const [loading, setLoading] = React.useState(true)
 
   React.useEffect(() => {
-    fetch(`${apiUrlSandbox}/accounts-overview?link=${link}`)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Bad response')
-        }
-        return response.json()
-      }).then(data => {
-        setAccountData(data);
-        setLoading(false)
-      }).catch(error => {
-        console.log("Faulty data from fetch")
-      })
-  }, [])
+    fetchAccountData(link,'accounts-overview',setAccountData, setLoading);
+  }
+  ,[])
 
   return (
     <>
@@ -49,7 +40,7 @@ export const AccountsTable: React.FC<BaseComponentProps> = ({link}) => {
             <TableBody>
               {accountData.map((account,idx) => (
                 <TableRow
-                  key={account.account_name}
+                  key={idx}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                 <TableCell component="th" scope="row">
